@@ -2,13 +2,24 @@ package me
 
 import (
 	"fmt"
-	"practice/module/module_1_1/person"
+	"practice/module/person"
 )
 
 type Me struct {
 	person.Person
 	Profession string
 	Logined    bool
+}
+
+func NewMe(name string, age int, hobby, profession string) *Me {
+	return &Me{
+		Person: person.Person{
+			Name:  name,
+			Age:   age,
+			Hobby: hobby,
+		},
+		Profession: profession,
+	}
 }
 
 func (m Me) Describe() string {

@@ -2,43 +2,20 @@ package main
 
 import (
 	"fmt"
-	"practice/module/interfaces/describer"
-	"practice/module/module_1_1/friend"
-	"practice/module/module_1_1/me"
-	"practice/module/module_1_1/person"
-	"practice/module/module_1_1/relative"
+
+	"practice/module/describer"
+	"practice/module/friend"
+	"practice/module/me"
+	"practice/module/relative"
 )
 
 func main() {
-	meUser := me.Me{
-		Person: person.Person{
-			Name:  "Вовчик",
-			Age:   19,
-			Hobby: "Клуби",
-		},
-		Profession: "Розробник",
-		Logined:    false,
-	}
+	meUser := me.NewMe("Вовчик", 19, "Клуби", "Розробник")
+	friendUser := friend.NewFriend("im_coderrr", 20, "gin", "daryana, maybe baybe")
+	relativeUser := relative.NewRelative("Olexandr", 67, "beer", "Тітанік")
 
-	friendUser := friend.Friend{
-		Person: person.Person{
-			Name:  "im_coderrr",
-			Age:   20,
-			Hobby: "gin",
-		},
-		FavoriteSong: "daryana, maybe baybe",
-	}
+	people := []describer.Describer{meUser, friendUser, relativeUser}
 
-	relativeUser := relative.Relative{
-		Person: person.Person{
-			Name:  "Olexandr",
-			Age:   67,
-			Hobby: "beer",
-		},
-		FavoriteMovie: "Тітанік",
-	}
-
-	var people []describer.Describer = []describer.Describer{&meUser, &friendUser, &relativeUser}
 	for _, p := range people {
 		fmt.Println(p.Describe())
 	}
@@ -54,7 +31,7 @@ func main() {
 	meUser.Login()
 	fmt.Printf("Logined (після Login): %v\n", meUser.Logined)
 
-	copyMe := meUser
+	copyMe := *meUser
 	copyMe.Logout()
 	fmt.Printf("Logined (після Logout копії): %v\n", meUser.Logined)
 }
