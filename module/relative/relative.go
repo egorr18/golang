@@ -2,12 +2,23 @@ package relative
 
 import (
 	"fmt"
-	"practice/module/module_1_1/person"
+	"practice/module/person"
 )
 
 type Relative struct {
 	person.Person
 	FavoriteMovie string
+}
+
+func NewRelative(name string, age int, hobby, movie string) *Relative {
+	return &Relative{
+		Person: person.Person{
+			Name:  name,
+			Age:   age,
+			Hobby: hobby,
+		},
+		FavoriteMovie: movie,
+	}
 }
 
 func (r Relative) Describe() string {
